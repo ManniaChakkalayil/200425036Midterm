@@ -105,24 +105,24 @@ public class MainActivity extends AppCompatActivity {
 
         if ((userchoice == "stone") && (computerchoice == "paper")) {
             Winner = "Computer";
-            computerscore++;
+
         } else if ((userchoice == "stone") && (computerchoice == "scissors")) {
             Winner = "User";
-            humanScore++;
+
 
         } else if ((userchoice == "paper") && (computerchoice == "scissors")) {
             Winner = "Computer";
-            computerscore++;
+
         } else if ((userchoice == "paper") && (computerchoice == "stone")) {
             Winner = "User";
-            humanScore++;
+
         } else if ((userchoice == "scissors") && (computerchoice == "stone")) {
             Winner = "Computer";
-            computerscore++;
+
         } else if ((userchoice == "scissors") && (computerchoice == "paper")) {
 
             Winner = "Computer";
-            humanScore++;
+
 
         } else if (userchoice == "stone" && computerchoice == "stone")
             Winner= "draw";
@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(MainActivity.this, Winner, Toast.LENGTH_SHORT).show();
 
     }
-    public void scoremessage(String msg){
+    public void msg(String msg){
         String message= msg;
         String id=db.push().getKey();
         variable v=new variable(id,firstName,LastName,Winner);
