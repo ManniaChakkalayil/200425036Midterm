@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">200425036-Midterm</string>
+
+    <array name="genres">
+        <item name="rock">ROCK</item>
+        <item name="paper">PAPER</item>
+        <item name="scissors">SCISSORS</item>
+
+    </array>
+</resources>

@@ -1,0 +1,150 @@
+package com.example.a200425036_midterm;
+
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+public class MainActivity extends AppCompatActivity {
+
+    EditText firstName, LastName;
+    Spinner spinner;
+    Button play, reset;
+    String userchoice, computerchoice;
+    TextView androidchoice;
+    int humanScore;
+    int computerscore;
+    String result;
+
+  List<variable> list;
+    Random r;
+    DatabaseReference db;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        firstName = findViewById(R.id.editText);
+        LastName = findViewById(R.id.editText2);
+        spinner = findViewById(R.id.spinner);
+        play = findViewById(R.id.button);
+        reset = findViewById(R.id.button2);
+        androidchoice = findViewById(R.id.textView);
+
+        list = new ArrayList<>();
+
+        db = FirebaseDatabase.getInstance().getReference("data");
+
+
+
+
+        spinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                variable v = list.get(position);
+
+
+            }
+        });
+
+        play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                new Random();
+
+
+            }
+        });
+        reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                firstName.setText("");
+                LastName.setText("");
+            }
+        });
+
+    }
+
+    public static final Random rand = new Random();
+    int randInt = rand.nextInt(100) + 1;
+
+    {
+
+
+        if (randInt < 34) {
+            computerchoice = "Rock";
+            androidchoice.setText(computerchoice);
+
+        }
+        if (randInt > 33 && randInt < 67) {
+            computerchoice = "paper";
+            androidchoice.setText(computerchoice);
+
+        }
+        if (randInt > 66) {
+            computerchoice = "scissors";
+            androidchoice.setText(computerchoice);
+
+        }
+
+        if ((userchoice == "stone") && (computerchoice == "paper")) {
+            result = "you lose";
+            computerscore++;
+        } else if ((userchoice == "stone") && (computerchoice == "scissors")) {
+            result = "you win";
+            humanScore++;
+
+        } else if ((userchoice == "paper") && (computerchoice == "scissors")) {
+            result = "you lose";
+            computerscore++;
+        } else if ((userchoice == "paper") && (computerchoice == "stone")) {
+            result = "you win";
+            humanScore++;
+        } else if ((userchoice == "scissors") && (computerchoice == "stone")) {
+            result = "you lose";
+            computerscore++;
+        } else if ((userchoice == "scissors") && (computerchoice == "paper")) {
+
+            result = "you win";
+            humanScore++;
+
+        } else if (userchoice == "stone" && computerchoice == "stone")
+            result = "draw";
+
+        else if (userchoice == "paper" && computerchoice == "paper")
+            result = "draw";
+
+        else if (userchoice == "scissors" && computerchoice == "scissors")
+            result = "draw";
+
+        Toast.makeText(MainActivity.this, result, Toast.LENGTH_SHORT).show();
+
+    }
+
+    }
+
+
+
+
+
