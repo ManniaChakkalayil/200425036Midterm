@@ -31,8 +31,7 @@ public class MainActivity extends AppCompatActivity {
     Button play, reset;
     String userchoice, computerchoice;
     TextView androidchoice;
-    int humanScore;
-    int computerscore;
+
     String Winner;
 
   List<variable> list;
