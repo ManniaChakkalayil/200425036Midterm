@@ -33,10 +33,10 @@ public class MainActivity extends AppCompatActivity {
     TextView androidchoice;
     int humanScore;
     int computerscore;
-    String result;
+    String Winner;
 
   List<variable> list;
-    Random r;
+
     DatabaseReference db;
 
     @Override
@@ -56,22 +56,17 @@ public class MainActivity extends AppCompatActivity {
         db = FirebaseDatabase.getInstance().getReference("data");
 
 
-
-
-        spinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                variable v = list.get(position);
-
-
-            }
-        });
-
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                new Random();
+                rand();
+                String msg ="Winner:"+Winner;
+
+                Toast.makeText(MainActivity.this,Winner,Toast.LENGTH_SHORT).show();
+
+
+
 
 
             }
@@ -109,40 +104,48 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if ((userchoice == "stone") && (computerchoice == "paper")) {
-            result = "you lose";
+            Winner = "Computer";
             computerscore++;
         } else if ((userchoice == "stone") && (computerchoice == "scissors")) {
-            result = "you win";
+            Winner = "User";
             humanScore++;
 
         } else if ((userchoice == "paper") && (computerchoice == "scissors")) {
-            result = "you lose";
+            Winner = "Computer";
             computerscore++;
         } else if ((userchoice == "paper") && (computerchoice == "stone")) {
-            result = "you win";
+            Winner = "User";
             humanScore++;
         } else if ((userchoice == "scissors") && (computerchoice == "stone")) {
-            result = "you lose";
+            Winner = "Computer";
             computerscore++;
         } else if ((userchoice == "scissors") && (computerchoice == "paper")) {
 
-            result = "you win";
+            Winner = "Computer";
             humanScore++;
 
         } else if (userchoice == "stone" && computerchoice == "stone")
-            result = "draw";
+            Winner= "draw";
 
         else if (userchoice == "paper" && computerchoice == "paper")
-            result = "draw";
+           Winner= "draw";
 
         else if (userchoice == "scissors" && computerchoice == "scissors")
-            result = "draw";
+          Winner = "draw";
 
-        Toast.makeText(MainActivity.this, result, Toast.LENGTH_SHORT).show();
+        Toast.makeText(MainActivity.this, Winner, Toast.LENGTH_SHORT).show();
+
+    }
+    public void scoremessage(String msg){
+        String message= msg;
+        String id=db.push().getKey();
+        variable v=new variable(id,firstName,LastName,Winner);
+        db.child(id).setValue(v);
 
     }
 
-    }
+
+}
 
 
 
